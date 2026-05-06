@@ -1,0 +1,50 @@
+{
+  "name": "AdminEmailLog",
+  "type": "object",
+  "properties": {
+    "recipient_email": {
+      "type": "string",
+      "title": "Destinataire (email)"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Objet"
+    },
+    "body": {
+      "type": "string",
+      "title": "Contenu"
+    },
+    "sent_by": {
+      "type": "string",
+      "title": "Admin exp\u00e9diteur (email)"
+    }
+  },
+  "required": [
+    "recipient_email",
+    "subject",
+    "body",
+    "sent_by"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

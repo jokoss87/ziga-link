@@ -1,0 +1,129 @@
+{
+  "type": "object",
+  "name": "SupportConfig",
+  "properties": {
+    "amounts": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "title": "Montants propos\u00e9s",
+      "default": [
+        2,
+        5,
+        10
+      ]
+    },
+    "allow_custom_amount": {
+      "type": "boolean",
+      "title": "Montant libre activ\u00e9",
+      "default": false
+    },
+    "allow_monthly": {
+      "type": "boolean",
+      "title": "Abonnement mensuel propos\u00e9",
+      "default": true
+    },
+    "allow_onetime": {
+      "type": "boolean",
+      "title": "Paiement unique propos\u00e9",
+      "default": true
+    },
+    "currency": {
+      "type": "string",
+      "title": "Devise",
+      "default": "eur"
+    },
+    "text_post_walk_title": {
+      "type": "string",
+      "title": "Titre message post-balade"
+    },
+    "text_post_walk_body": {
+      "type": "string",
+      "title": "Corps message post-balade"
+    },
+    "text_post_walk_cta": {
+      "type": "string",
+      "title": "Texte bouton post-balade"
+    },
+    "text_post_walk_delay_days": {
+      "type": "number",
+      "title": "D\u00e9lai entre affichages (jours)",
+      "default": 7
+    },
+    "text_profile_title": {
+      "type": "string",
+      "title": "Titre section profil"
+    },
+    "text_profile_body": {
+      "type": "string",
+      "title": "Corps section profil"
+    },
+    "text_profile_cta": {
+      "type": "string",
+      "title": "Texte bouton profil"
+    },
+    "text_support_page_title": {
+      "type": "string",
+      "title": "Titre page soutien"
+    },
+    "text_support_page_subtitle": {
+      "type": "string",
+      "title": "Sous-titre page soutien"
+    },
+    "vision_text": {
+      "type": "string",
+      "title": "Texte vision / ambitions de l'app"
+    },
+    "vision_visible": {
+      "type": "boolean",
+      "title": "Bloc vision visible sur la page soutien",
+      "default": false
+    },
+    "text_badge": {
+      "type": "string",
+      "title": "Texte badge soutien"
+    },
+    "text_founder_badge": {
+      "type": "string",
+      "title": "Texte badge fondateur"
+    },
+    "founder_mode_active": {
+      "type": "boolean",
+      "title": "Badge fondateur actif",
+      "default": false
+    },
+    "founder_limit": {
+      "type": "number",
+      "title": "Nombre max membres fondateurs"
+    },
+    "monthly_goal_active": {
+      "type": "boolean",
+      "title": "Objectif mensuel actif",
+      "default": false
+    },
+    "monthly_goal_label": {
+      "type": "string",
+      "title": "Label objectif mensuel"
+    },
+    "monthly_goal_amount": {
+      "type": "number",
+      "title": "Montant objectif (\u20ac)"
+    },
+    "monthly_goal_reached": {
+      "type": "number",
+      "title": "Montant atteint (saisi manuellement)"
+    },
+    "monthly_goal_description": {
+      "type": "string",
+      "title": "Description objectif"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": null,
+    "read": {},
+    "update": null,
+    "delete": null
+  }
+}

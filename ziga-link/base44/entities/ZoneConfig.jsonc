@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "name": "ZoneConfig",
+  "properties": {
+    "zoneTag": {
+      "type": "string",
+      "title": "Zone (eymoutiers, limoges, paris, default\u2026)"
+    },
+    "home_sections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Ordre des sections home",
+      "description": "Valeurs possibles : nearby, map, activities, suggestion, challenge, feed"
+    },
+    "feature_flags": {
+      "type": "object",
+      "title": "Feature flags (JSON)",
+      "description": "Ex: { \"matching_advanced\": false, \"show_challenge\": true, \"show_map\": true, \"show_activities\": true, \"show_feed\": true }",
+      "additionalProperties": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Zone active",
+      "default": true
+    },
+    "description": {
+      "type": "string",
+      "title": "Note admin"
+    }
+  },
+  "required": [
+    "zoneTag"
+  ],
+  "rls": {
+    "create": null,
+    "read": {},
+    "update": null,
+    "delete": null
+  }
+}

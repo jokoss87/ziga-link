@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "name": "ConversationMessage",
+  "properties": {
+    "conversation_id": {
+      "type": "string",
+      "title": "Conversation"
+    },
+    "sender_email": {
+      "type": "string",
+      "title": "Email exp\u00e9diteur"
+    },
+    "sender_pseudo": {
+      "type": "string",
+      "title": "Pseudo exp\u00e9diteur"
+    },
+    "content": {
+      "type": "string",
+      "title": "Message"
+    }
+  },
+  "required": [
+    "conversation_id",
+    "content",
+    "sender_email"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

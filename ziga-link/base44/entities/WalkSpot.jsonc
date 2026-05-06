@@ -1,0 +1,115 @@
+{
+  "type": "object",
+  "name": "WalkSpot",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Nom du lieu"
+    },
+    "spot_type": {
+      "type": "string",
+      "enum": [
+        "forest",
+        "park",
+        "dog_park",
+        "garden",
+        "grassland",
+        "heath",
+        "water",
+        "mixed"
+      ],
+      "title": "Type de spot"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "area_m2": {
+      "type": "number",
+      "title": "Surface estim\u00e9e (m\u00b2)"
+    },
+    "path_count": {
+      "type": "integer",
+      "title": "Nombre de chemins",
+      "default": 0
+    },
+    "has_water": {
+      "type": "boolean",
+      "title": "Pr\u00e9sence d'eau",
+      "default": false
+    },
+    "activity_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Niveau d'activit\u00e9 canine",
+      "default": "low"
+    },
+    "walk_count": {
+      "type": "integer",
+      "title": "Promenades d\u00e9tect\u00e9es",
+      "default": 0
+    },
+    "zoneTag": {
+      "type": "string",
+      "title": "Zone"
+    },
+    "osm_id": {
+      "type": "string",
+      "title": "OSM ID source"
+    },
+    "circuits": {
+      "type": "array",
+      "title": "Circuits g\u00e9n\u00e9r\u00e9s",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "distance_km": {
+            "type": "number"
+          },
+          "duration_min": {
+            "type": "integer"
+          },
+          "difficulty": {
+            "type": "string"
+          },
+          "surface": {
+            "type": "string"
+          },
+          "start_lat": {
+            "type": "number"
+          },
+          "start_lng": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "last_osm_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dernier sync OSM"
+    }
+  },
+  "required": [
+    "latitude",
+    "longitude",
+    "spot_type"
+  ],
+  "rls": {
+    "create": null,
+    "read": {},
+    "update": null,
+    "delete": null
+  }
+}

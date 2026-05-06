@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "name": "ModerationAlert",
+  "properties": {
+    "alert_type": {
+      "type": "string",
+      "enum": [
+        "warning_owner",
+        "shadow_ban_owner",
+        "alert_dog",
+        "alert_tags"
+      ],
+      "title": "Type d'alerte"
+    },
+    "target_email": {
+      "type": "string",
+      "title": "Email cible"
+    },
+    "target_name": {
+      "type": "string",
+      "title": "Nom cible"
+    },
+    "dog_id": {
+      "type": "string",
+      "title": "ID Chien"
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "trigger_detail": {
+      "type": "string",
+      "title": "D\u00e9tail du d\u00e9clencheur"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "in_progress",
+        "resolved"
+      ],
+      "title": "Statut",
+      "default": "new"
+    },
+    "admin_note": {
+      "type": "string",
+      "title": "Note admin"
+    },
+    "resolved_at": {
+      "type": "string",
+      "title": "R\u00e9solu le"
+    },
+    "resolved_by": {
+      "type": "string",
+      "title": "R\u00e9solu par (email)"
+    },
+    "auto_action": {
+      "type": "string",
+      "title": "Action automatique appliqu\u00e9e"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

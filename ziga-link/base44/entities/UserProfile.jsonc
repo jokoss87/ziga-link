@@ -1,0 +1,162 @@
+{
+  "type": "object",
+  "name": "UserProfile",
+  "properties": {
+    "pseudo": {
+      "type": "string",
+      "title": "Pseudo"
+    },
+    "firstName": {
+      "type": "string",
+      "title": "Pr\u00e9nom"
+    },
+    "phone": {
+      "type": "string",
+      "title": "T\u00e9l\u00e9phone"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo de profil"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "postalCode": {
+      "type": "string",
+      "title": "Code postal"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "zoneTag": {
+      "type": "string",
+      "title": "Zone (eymoutiers, limoges, paris, etc.)"
+    },
+    "bio": {
+      "type": "string",
+      "title": "\u00c0 propos"
+    },
+    "experience_level": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "experienced",
+        "expert"
+      ],
+      "title": "Niveau d'exp\u00e9rience canine"
+    },
+    "preferred_activities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Activit\u00e9s pr\u00e9f\u00e9r\u00e9es"
+    },
+    "user_status": {
+      "type": "string",
+      "enum": [
+        "disponible",
+        "en_balade",
+        "au_repos",
+        "cherche_compagnon"
+      ],
+      "title": "Statut",
+      "default": "disponible"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "title": "Email v\u00e9rifi\u00e9",
+      "default": false
+    },
+    "isActive": {
+      "type": "boolean",
+      "title": "Profil actif",
+      "default": true
+    },
+    "reputation_score": {
+      "type": "number",
+      "title": "Score r\u00e9putation",
+      "default": 0
+    },
+    "trust_level": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "warning",
+        "shadow_banned"
+      ],
+      "title": "Niveau de confiance",
+      "default": "normal"
+    },
+    "blocked_users": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Utilisateurs bloqu\u00e9s"
+    },
+    "is_shadow_banned": {
+      "type": "boolean",
+      "title": "Shadow ban (invisible sans le savoir)",
+      "default": false
+    },
+    "member_pseudos_updated_at": {
+      "type": "string",
+      "title": "Derni\u00e8re sync pseudo conversations (ISO date)"
+    },
+    "last_search_notif_at": {
+      "type": "string",
+      "title": "Derni\u00e8re notification cherche_compagnon envoy\u00e9e (ISO date)"
+    },
+    "monthly_goal": {
+      "type": "number",
+      "title": "Objectif mensuel d'activit\u00e9s",
+      "default": 0
+    },
+    "onboarding_step": {
+      "type": "number",
+      "title": "\u00c9tape onboarding",
+      "default": 4
+    }
+  },
+  "required": [
+    "pseudo"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

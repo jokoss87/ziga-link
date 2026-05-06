@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="google" content="notranslate">
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preload" as="image" fetchpriority="high" href="/icons/splash-1080x1920.png" />
+    <title>Ziga Link</title>
+    <style>
+      #splash {
+        position: fixed; inset: 0; z-index: 9999;
+        background: #0f3d28 url('/icons/splash-1080x1920.png') center center / cover no-repeat;
+        opacity: 1; transition: opacity 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="splash"></div>
+    <div id="root"></div>
+    <script>
+      sessionStorage.setItem('zigalink_welcome_seen', '1');
+      function hideSplash() {
+        var s = document.getElementById('splash');
+        if (!s) return;
+        s.style.opacity = '0';
+        setTimeout(function() { if (s.parentNode) s.parentNode.removeChild(s); }, 520);
+      }
+      setTimeout(hideSplash, 2500);
+      var observer = new MutationObserver(function() {
+        var root = document.getElementById('root');
+        if (root && root.firstChild) { setTimeout(hideSplash, 300); observer.disconnect(); }
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        var root = document.getElementById('root');
+        if (root) observer.observe(root, { childList: true });
+      });
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

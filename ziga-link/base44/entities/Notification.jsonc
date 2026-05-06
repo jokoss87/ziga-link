@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "name": "Notification",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "title": "Destinataire (email)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "message",
+        "group_message",
+        "walk_request",
+        "activity_join",
+        "walk_accepted",
+        "walk_declined",
+        "match_suggestion",
+        "level_up",
+        "bug_response",
+        "place_updated",
+        "activity_cancelled",
+        "encounter_rating",
+        "activity_request",
+        "participant_absent",
+        "activity_started",
+        "activity_ended",
+        "reminder_2h",
+        "reminder_30min"
+      ],
+      "title": "Type de notification"
+    },
+    "title": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "body": {
+      "type": "string",
+      "title": "Corps du message"
+    },
+    "reference_id": {
+      "type": "string",
+      "title": "ID de r\u00e9f\u00e9rence"
+    },
+    "link_page": {
+      "type": "string",
+      "title": "Page cible"
+    },
+    "link_param": {
+      "type": "string",
+      "title": "Param\u00e8tre de lien"
+    },
+    "is_read": {
+      "type": "boolean",
+      "title": "Lu",
+      "default": false
+    }
+  },
+  "required": [
+    "user_email",
+    "type",
+    "title"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

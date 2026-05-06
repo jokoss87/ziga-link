@@ -1,0 +1,64 @@
+{
+  "name": "DailyAnalytics",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "title": "Date (YYYY-MM-DD)"
+    },
+    "total_sessions": {
+      "type": "number",
+      "title": "Sessions totales",
+      "default": 0
+    },
+    "unique_users": {
+      "type": "number",
+      "title": "Utilisateurs uniques",
+      "default": 0
+    },
+    "avg_duration_seconds": {
+      "type": "number",
+      "title": "Dur\u00e9e moy. session (sec)",
+      "default": 0
+    },
+    "avg_active_seconds": {
+      "type": "number",
+      "title": "Temps actif moy. (sec)",
+      "default": 0
+    },
+    "section_times": {
+      "type": "object",
+      "title": "Temps total par section (sec)"
+    },
+    "sessions_per_user": {
+      "type": "number",
+      "title": "Sessions moy. par utilisateur",
+      "default": 0
+    }
+  },
+  "required": [
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

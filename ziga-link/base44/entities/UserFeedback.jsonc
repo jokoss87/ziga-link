@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "name": "UserFeedback",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "user_name": {
+      "type": "string",
+      "title": "Nom utilisateur"
+    },
+    "liked": {
+      "type": "string",
+      "title": "Ce qu'il a aim\u00e9"
+    },
+    "disliked": {
+      "type": "string",
+      "title": "Ce qu'il a moins aim\u00e9"
+    },
+    "is_fluid": {
+      "type": "string",
+      "enum": [
+        "oui",
+        "moyennement",
+        "non"
+      ],
+      "title": "Application fluide ?"
+    },
+    "had_bug": {
+      "type": "boolean",
+      "title": "Probl\u00e8me technique ?",
+      "default": false
+    },
+    "suggestion": {
+      "type": "string",
+      "title": "Suggestion"
+    },
+    "pleasure_score": {
+      "type": "number",
+      "title": "Score de plaisir (%)"
+    },
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "form",
+        "exit"
+      ],
+      "title": "Type de retour"
+    }
+  },
+  "required": [
+    "feedback_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": null,
+    "update": null,
+    "delete": null
+  }
+}

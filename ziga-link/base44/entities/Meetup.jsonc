@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "name": "Meetup",
+  "properties": {
+    "matchId": {
+      "type": "string",
+      "title": "Match ID"
+    },
+    "meetupType": {
+      "type": "string",
+      "enum": [
+        "walk",
+        "playdate",
+        "training"
+      ],
+      "title": "Type de rencontre"
+    },
+    "environmentType": {
+      "type": "string",
+      "enum": [
+        "park",
+        "forest",
+        "urban"
+      ],
+      "title": "Type d'environnement"
+    },
+    "scheduledDate": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date programm\u00e9e"
+    },
+    "location": {
+      "type": "string",
+      "title": "Lieu"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "completed",
+        "canceled"
+      ],
+      "title": "Statut",
+      "default": "planned"
+    },
+    "feedbackScore": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Note de la rencontre (1-5)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes et observations"
+    }
+  },
+  "required": [
+    "meetupType",
+    "environmentType"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

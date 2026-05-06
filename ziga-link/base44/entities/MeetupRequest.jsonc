@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "properties": {
+    "announcement_id": {
+      "type": "string",
+      "title": "Annonce ID"
+    },
+    "requester_dog_id": {
+      "type": "string",
+      "title": "Chien du demandeur"
+    },
+    "requester_dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "requester_dog_photo": {
+      "type": "string",
+      "title": "Photo du chien demandeur"
+    },
+    "requester_name": {
+      "type": "string",
+      "title": "Nom du demandeur"
+    },
+    "requester_photo": {
+      "type": "string",
+      "title": "Photo du demandeur"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "declined"
+      ],
+      "title": "Statut",
+      "default": "pending"
+    },
+    "confirmed": {
+      "type": "boolean",
+      "title": "Pr\u00e9sence confirm\u00e9e par le participant"
+    },
+    "meeting_place_name": {
+      "type": "string",
+      "title": "Lieu propos\u00e9"
+    },
+    "meeting_place_lat": {
+      "type": "number",
+      "title": "Latitude lieu"
+    },
+    "meeting_place_lng": {
+      "type": "number",
+      "title": "Longitude lieu"
+    }
+  },
+  "required": [
+    "announcement_id",
+    "requester_dog_id"
+  ],
+  "name": "MeetupRequest",
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

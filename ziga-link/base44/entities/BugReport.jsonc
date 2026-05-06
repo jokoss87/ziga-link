@@ -1,0 +1,130 @@
+{
+  "type": "object",
+  "name": "BugReport",
+  "properties": {
+    "bug_type": {
+      "type": "string",
+      "enum": [
+        "affichage",
+        "fonction",
+        "calcul",
+        "carte",
+        "connexion",
+        "autre"
+      ],
+      "title": "Type de bug"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "page": {
+      "type": "string",
+      "title": "Page concern\u00e9e"
+    },
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "user_id": {
+      "type": "string",
+      "title": "ID utilisateur"
+    },
+    "app_version": {
+      "type": "string",
+      "title": "Version app"
+    },
+    "device_type": {
+      "type": "string",
+      "title": "Type appareil"
+    },
+    "os": {
+      "type": "string",
+      "title": "Syst\u00e8me d'exploitation"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "nouveau",
+        "en_cours",
+        "corrige"
+      ],
+      "title": "Statut",
+      "default": "nouveau"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "faible",
+        "moyenne",
+        "haute"
+      ],
+      "title": "Priorit\u00e9",
+      "default": "moyenne"
+    },
+    "admin_note": {
+      "type": "string",
+      "title": "Note interne (derni\u00e8re)"
+    },
+    "admin_notes_history": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "title": "Historique complet des notes",
+      "default": []
+    },
+    "admin_notes_updated_by": {
+      "type": "string",
+      "title": "Derni\u00e8re modif par (email)"
+    },
+    "admin_public_response": {
+      "type": "string",
+      "title": "R\u00e9ponse publique (visible utilisateur)"
+    },
+    "admin_public_response_date": {
+      "type": "string",
+      "title": "Date r\u00e9ponse publique"
+    },
+    "admin_responded_by": {
+      "type": "string",
+      "title": "R\u00e9pondu par (email)"
+    },
+    "user_notified": {
+      "type": "boolean",
+      "title": "Utilisateur notifi\u00e9 de la r\u00e9ponse",
+      "default": false
+    }
+  },
+  "required": [
+    "bug_type",
+    "description"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

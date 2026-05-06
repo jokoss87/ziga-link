@@ -1,0 +1,9 @@
+export const APP_NAME = "Ziga Link";
+export const APP_EMOJI = "🐾";
+export const APP_URL = "https://zigalink.fr";
+export const APP_EMAIL = "contact@zigalink.fr";
+export const APP_EMAIL_LEGAL = "legal@zigalink.fr";
+export const APP_EMAIL_ADMIN = "admin@zigalink.local";
+export const APP_SHARE_TEXT = "Rejoins Ziga Link — l'app canine créée par des professionnels et passionnés locaux !\nTrouve des compagnons de balade près de chez toi 👇";
+export const APP_SUPPORT_TEXT = "Ziga Link est gratuit et sans pub. Votre soutien nous aide à continuer.";
+export const STORAGE_KEY_PREFIX = "zigalink_";

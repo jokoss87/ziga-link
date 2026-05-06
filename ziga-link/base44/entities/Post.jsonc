@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "name": "Post",
+  "properties": {
+    "author_name": {
+      "type": "string",
+      "title": "Nom de l'auteur"
+    },
+    "author_photo": {
+      "type": "string",
+      "title": "Photo de l'auteur"
+    },
+    "content": {
+      "type": "string",
+      "title": "Texte du post"
+    },
+    "media_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos/Vid\u00e9os"
+    },
+    "dog_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Chiens mentionn\u00e9s"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "moment",
+        "exploit",
+        "conseils",
+        "question",
+        "evenement"
+      ],
+      "title": "Cat\u00e9gorie",
+      "default": "moment"
+    },
+    "likes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Likes (emails)"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "comment_count": {
+      "type": "number",
+      "title": "Nombre de commentaires",
+      "default": 0
+    }
+  },
+  "required": [
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "type": "object",
+  "name": "DogProfile",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "breed": {
+      "type": "string",
+      "title": "Race"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "title": "Date de naissance"
+    },
+    "age_years": {
+      "type": "number",
+      "title": "\u00c2ge (en ann\u00e9es)"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "title": "Sexe"
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "title": "Taille"
+    },
+    "weight": {
+      "type": "number",
+      "title": "Poids (kg)"
+    },
+    "isNeutered": {
+      "type": "boolean",
+      "title": "St\u00e9rilis\u00e9(e)"
+    },
+    "vaccinated": {
+      "type": "boolean",
+      "title": "Vaccin\u00e9(e)"
+    },
+    "is_in_heat": {
+      "type": "boolean",
+      "title": "En chaleur",
+      "default": false
+    },
+    "heat_end_date": {
+      "type": "string",
+      "title": "Fin des chaleurs estim\u00e9e"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo du chien"
+    },
+    "bio": {
+      "type": "string",
+      "title": "Description"
+    },
+    "energyLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Niveau d'\u00e9nergie (1-5)"
+    },
+    "good_with_dogs": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "sometimes",
+        "no"
+      ],
+      "title": "S'entend avec les chiens"
+    },
+    "sociabilityDogs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Sociabilit\u00e9 envers les chiens (1-5)"
+    },
+    "good_with_children": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "sometimes",
+        "no"
+      ],
+      "title": "S'entend avec les enfants"
+    },
+    "sociabilityHumans": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Sociabilit\u00e9 envers les humains (1-5)"
+    },
+    "reactivityLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Niveau de r\u00e9activit\u00e9 (1-5)"
+    },
+    "confidenceLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Niveau de confiance (1-5)"
+    },
+    "playStyle": {
+      "type": "string",
+      "enum": [
+        "chase",
+        "wrestling",
+        "calm",
+        "mixed"
+      ],
+      "title": "Style de jeu"
+    },
+    "recallLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "title": "Niveau de rappel (1-5)"
+    },
+    "leashBehavior": {
+      "type": "string",
+      "enum": [
+        "good",
+        "pulls",
+        "reactive"
+      ],
+      "title": "Comportement en laisse"
+    },
+    "medicalTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags m\u00e9dicaux (allergies, etc.)"
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Restrictions et contraintes"
+    },
+    "profileCompleteness": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "title": "Compl\u00e9tude du profil (%)",
+      "default": 0
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Derni\u00e8re mise \u00e0 jour"
+    },
+    "totalMatches": {
+      "type": "integer",
+      "title": "Nombre total de matchs",
+      "default": 0
+    },
+    "totalMeetups": {
+      "type": "integer",
+      "title": "Nombre total de rencontres",
+      "default": 0
+    }
+  },
+  "required": [
+    "name",
+    "breed",
+    "gender",
+    "size"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

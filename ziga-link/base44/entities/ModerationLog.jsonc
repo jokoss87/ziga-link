@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "name": "ModerationLog",
+  "properties": {
+    "moderator_email": {
+      "type": "string",
+      "title": "Mod\u00e9rateur (email)"
+    },
+    "target_user_email": {
+      "type": "string",
+      "title": "Compte cibl\u00e9 (email)"
+    },
+    "target_user_name": {
+      "type": "string",
+      "title": "Nom de l'auteur"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "delete_post",
+        "suspend",
+        "resolve_report",
+        "shadow_ban",
+        "shadow_unban"
+      ],
+      "title": "Action"
+    },
+    "post_content": {
+      "type": "string",
+      "title": "Contenu du post supprim\u00e9"
+    },
+    "post_id": {
+      "type": "string",
+      "title": "ID du post"
+    }
+  },
+  "required": [
+    "moderator_email",
+    "target_user_email",
+    "action"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": null
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "type": "object",
+  "name": "Activity",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Titre de l'activit\u00e9"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "canicross",
+        "cani_vtt",
+        "randonnee",
+        "agility",
+        "frisbee",
+        "traction",
+        "parkour",
+        "pistage",
+        "obeissance",
+        "socialisation",
+        "shaping",
+        "concours",
+        "libre",
+        "autre"
+      ],
+      "title": "Type d'activit\u00e9"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "sport",
+        "travail"
+      ],
+      "title": "Cat\u00e9gorie"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "date": {
+      "type": "string",
+      "title": "Date"
+    },
+    "time": {
+      "type": "string",
+      "title": "Heure"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Dur\u00e9e pr\u00e9vue (minutes)"
+    },
+    "distance_km": {
+      "type": "number",
+      "title": "Distance approximative (km)"
+    },
+    "max_participants": {
+      "type": "number",
+      "title": "Participants max"
+    },
+    "level_required": {
+      "type": "string",
+      "enum": [
+        "all",
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "title": "Niveau requis",
+      "default": "all"
+    },
+    "organizer_name": {
+      "type": "string",
+      "title": "Organisateur"
+    },
+    "organizer_photo": {
+      "type": "string",
+      "title": "Photo organisateur"
+    },
+    "dog_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Chiens de l'organisateur (IDs)",
+      "default": []
+    },
+    "dog_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Noms des chiens de l'organisateur",
+      "default": []
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Participants (emails)"
+    },
+    "participants_ended": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Participants ayant sauvegard\u00e9 (emails)",
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "full",
+        "cancelled",
+        "completed"
+      ],
+      "title": "Statut",
+      "default": "open"
+    },
+    "reminder_sent_flags": {
+      "type": "object",
+      "title": "Rappels envoy\u00e9s (idempotence)",
+      "default": {}
+    },
+    "activity_started_at": {
+      "type": "string",
+      "title": "Activit\u00e9 d\u00e9marr\u00e9e le (ISO)"
+    },
+    "activity_ended_at": {
+      "type": "string",
+      "title": "Activit\u00e9 termin\u00e9e le (ISO)"
+    },
+    "meeting_place_name": {
+      "type": "string",
+      "title": "Lieu de rendez-vous"
+    },
+    "meeting_place_lat": {
+      "type": "number",
+      "title": "Latitude lieu RDV"
+    },
+    "meeting_place_lng": {
+      "type": "number",
+      "title": "Longitude lieu RDV"
+    }
+  },
+  "required": [
+    "title",
+    "type",
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "data.status": "open"
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.participants": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "name": "MarketingLog",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Titre du message"
+    },
+    "body": {
+      "type": "string",
+      "title": "Corps du message"
+    },
+    "sent_by": {
+      "type": "string",
+      "title": "Envoy\u00e9 par (email admin)"
+    },
+    "send_mode": {
+      "type": "string",
+      "enum": [
+        "zone",
+        "select"
+      ],
+      "title": "Mode d'envoi"
+    },
+    "zone": {
+      "type": "string",
+      "title": "Zone cibl\u00e9e"
+    },
+    "recipient_count": {
+      "type": "number",
+      "title": "Nombre de destinataires",
+      "default": 0
+    },
+    "recipient_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Emails destinataires (s\u00e9lection manuelle)"
+    }
+  },
+  "required": [
+    "title",
+    "body",
+    "sent_by"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

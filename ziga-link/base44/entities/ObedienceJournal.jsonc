@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "name": "ObedienceJournal",
+  "properties": {
+    "dog_id": {
+      "type": "string",
+      "title": "Chien (ID)"
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "owner_id": {
+      "type": "string",
+      "title": "Propri\u00e9taire (email)"
+    },
+    "xp_total": {
+      "type": "number",
+      "title": "XP Total",
+      "default": 0
+    },
+    "dog_level": {
+      "type": "number",
+      "title": "Niveau g\u00e9n\u00e9ral du chien",
+      "default": 1
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Badges acquis"
+    },
+    "progress": {
+      "type": "object",
+      "title": "Progression par ordre (cl\u00e9 = orderId, valeur = niveau actuel 0-5)",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Derni\u00e8re mise \u00e0 jour"
+    }
+  },
+  "required": [
+    "dog_id",
+    "owner_id"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

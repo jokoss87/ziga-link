@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "name": "PostComment",
+  "properties": {
+    "post_id": {
+      "type": "string",
+      "title": "Post"
+    },
+    "author_name": {
+      "type": "string",
+      "title": "Nom de l'auteur"
+    },
+    "author_photo": {
+      "type": "string",
+      "title": "Photo de l'auteur"
+    },
+    "content": {
+      "type": "string",
+      "title": "Commentaire"
+    }
+  },
+  "required": [
+    "post_id",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

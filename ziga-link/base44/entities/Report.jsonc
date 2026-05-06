@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "name": "Report",
+  "properties": {
+    "reported_user_email": {
+      "type": "string",
+      "title": "Utilisateur signal\u00e9"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "spam",
+        "harcelement",
+        "faux_profil",
+        "contenu_inapproprie",
+        "autre"
+      ],
+      "title": "Raison"
+    },
+    "details": {
+      "type": "string",
+      "title": "D\u00e9tails"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "reviewed",
+        "resolved"
+      ],
+      "title": "Statut",
+      "default": "pending"
+    }
+  },
+  "required": [
+    "reported_user_email",
+    "reason"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": null,
+    "update": null,
+    "delete": null
+  }
+}

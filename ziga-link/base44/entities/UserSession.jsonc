@@ -1,0 +1,41 @@
+{
+  "name": "UserSession",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "session_start": {
+      "type": "string",
+      "title": "D\u00e9but de session"
+    },
+    "session_end": {
+      "type": "string",
+      "title": "Fin de session"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "title": "Dur\u00e9e totale (sec)",
+      "default": 0
+    },
+    "active_seconds": {
+      "type": "number",
+      "title": "Temps actif (sec)",
+      "default": 0
+    },
+    "section_times": {
+      "type": "object",
+      "title": "Temps par section (sec)"
+    }
+  },
+  "required": [
+    "user_email"
+  ],
+  "rls": {
+    "create": {},
+    "read": null,
+    "update": null,
+    "delete": null
+  }
+}

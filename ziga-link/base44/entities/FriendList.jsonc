@@ -1,0 +1,96 @@
+{
+  "name": "FriendList",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "friend_requests_sent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Demandes envoy\u00e9es (emails)",
+      "default": []
+    },
+    "friend_requests_received": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Demandes re\u00e7ues (emails)",
+      "default": []
+    },
+    "friends": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Amis confirm\u00e9s (emails)",
+      "default": []
+    },
+    "streaks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "title": "Streaks par ami",
+      "default": []
+    }
+  },
+  "required": [
+    "user_email"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}",
+      "data.user_email": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

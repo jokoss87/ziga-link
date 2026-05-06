@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "name": "Match",
+  "properties": {
+    "dogA": {
+      "type": "string",
+      "title": "Chien A (ID)"
+    },
+    "dogB": {
+      "type": "string",
+      "title": "Chien B (ID)"
+    },
+    "distanceKm": {
+      "type": "number",
+      "title": "Distance (km)"
+    },
+    "sizeCompatible": {
+      "type": "boolean",
+      "title": "Taille compatible"
+    },
+    "compatibilityScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "title": "Score de compatibilit\u00e9 (0-100)",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "accepted",
+        "refused",
+        "expired"
+      ],
+      "title": "Statut",
+      "default": "proposed"
+    }
+  },
+  "required": [
+    "dogA",
+    "dogB",
+    "distanceKm"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

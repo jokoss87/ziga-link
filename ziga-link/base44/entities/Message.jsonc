@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "title": "Demande de rencontre ID"
+    },
+    "sender_email": {
+      "type": "string",
+      "title": "Email de l'exp\u00e9diteur"
+    },
+    "sender_name": {
+      "type": "string",
+      "title": "Nom de l'exp\u00e9diteur"
+    },
+    "content": {
+      "type": "string",
+      "title": "Message"
+    }
+  },
+  "required": [
+    "request_id",
+    "content"
+  ],
+  "name": "Message",
+  "rls": {
+    "create": {
+      "data.sender_email": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

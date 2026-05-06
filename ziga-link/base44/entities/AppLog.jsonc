@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "name": "AppLog",
+  "properties": {
+    "level": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warn",
+        "error",
+        "critical"
+      ],
+      "title": "Niveau"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "matching",
+        "auth",
+        "react_crash",
+        "performance",
+        "data",
+        "other"
+      ],
+      "title": "Cat\u00e9gorie"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "details": {
+      "type": "string",
+      "title": "D\u00e9tails techniques"
+    },
+    "user_email": {
+      "type": "string",
+      "title": "Utilisateur concern\u00e9"
+    },
+    "page": {
+      "type": "string",
+      "title": "Page"
+    },
+    "stack": {
+      "type": "string",
+      "title": "Stack trace"
+    },
+    "resolved": {
+      "type": "boolean",
+      "title": "R\u00e9solu",
+      "default": false
+    }
+  },
+  "required": [
+    "level",
+    "category",
+    "message"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

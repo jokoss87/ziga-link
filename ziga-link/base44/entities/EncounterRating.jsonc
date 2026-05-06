@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "name": "EncounterRating",
+  "properties": {
+    "announcement_id": {
+      "type": "string",
+      "title": "ID Annonce"
+    },
+    "from_email": {
+      "type": "string",
+      "title": "\u00c9valuateur (email)"
+    },
+    "to_email": {
+      "type": "string",
+      "title": "\u00c9valu\u00e9 (email)"
+    },
+    "dog_id": {
+      "type": "string",
+      "title": "ID Chien"
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "rating_type": {
+      "type": "string",
+      "enum": [
+        "dog",
+        "owner"
+      ],
+      "title": "Type d'\u00e9valuation"
+    },
+    "score": {
+      "type": "string",
+      "enum": [
+        "green",
+        "yellow",
+        "red"
+      ],
+      "title": "Score"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "default": []
+    },
+    "internal_score": {
+      "type": "number",
+      "title": "Score interne calcul\u00e9",
+      "default": 0
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.to_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

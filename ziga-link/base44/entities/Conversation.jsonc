@@ -1,0 +1,124 @@
+{
+  "type": "object",
+  "name": "Conversation",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Nom du groupe"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "private",
+        "group"
+      ],
+      "title": "Type",
+      "default": "private"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "balade",
+        "sport",
+        "obeissance",
+        "social"
+      ],
+      "title": "Cat\u00e9gorie (pour couleurs)",
+      "default": "social"
+    },
+    "reference_id": {
+      "type": "string",
+      "title": "ID de l'activit\u00e9 ou annonce li\u00e9e"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Membres (emails)"
+    },
+    "member_pseudos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Pseudonymes des membres"
+    },
+    "member_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos des membres (urls)"
+    },
+    "member_statuses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Statuts des membres (user_status)"
+    },
+    "member_pseudos_updated_at": {
+      "type": "string",
+      "title": "Derni\u00e8re sync pseudos (ISO date)"
+    },
+    "last_message": {
+      "type": "string",
+      "title": "Dernier message"
+    },
+    "last_message_at": {
+      "type": "string",
+      "title": "Date dernier message"
+    },
+    "last_message_by": {
+      "type": "string",
+      "title": "Auteur dernier message (pseudo)"
+    },
+    "created_by_pseudo": {
+      "type": "string",
+      "title": "Cr\u00e9\u00e9 par (pseudo)"
+    },
+    "unread_counts": {
+      "type": "object",
+      "title": "Messages non lus par email"
+    }
+  },
+  "required": [
+    "members",
+    "type"
+  ],
+  "rls": {
+    "create": {
+      "data.members": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "data.members": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.members": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

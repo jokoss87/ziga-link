@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "name": "LegalDocument",
+  "properties": {
+    "version": {
+      "type": "string",
+      "title": "Version"
+    },
+    "effective_date": {
+      "type": "string",
+      "title": "Date d'entr\u00e9e en vigueur"
+    },
+    "intro": {
+      "type": "string",
+      "title": "Introduction"
+    },
+    "license": {
+      "type": "string",
+      "title": "Licence d'usage"
+    },
+    "allowed": {
+      "type": "string",
+      "title": "Ce que vous pouvez faire"
+    },
+    "forbidden": {
+      "type": "string",
+      "title": "Ce que vous ne pouvez pas faire"
+    },
+    "legal_recourse": {
+      "type": "string",
+      "title": "Recours l\u00e9gaux en cas de violation"
+    },
+    "contact": {
+      "type": "string",
+      "title": "Contact l\u00e9gal"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Version active",
+      "default": true
+    }
+  },
+  "required": [
+    "version",
+    "effective_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

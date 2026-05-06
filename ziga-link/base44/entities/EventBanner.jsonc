@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "name": "EventBanner",
+  "properties": {
+    "is_visible": {
+      "type": "boolean",
+      "default": false,
+      "title": "Visible"
+    },
+    "title": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "subtitle": {
+      "type": "string",
+      "title": "Sous-titre"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "image_url": {
+      "type": "string",
+      "title": "URL image de fond"
+    },
+    "background_color": {
+      "type": "string",
+      "title": "Couleur de fond"
+    },
+    "button_label": {
+      "type": "string",
+      "title": "Texte du bouton"
+    },
+    "button_url": {
+      "type": "string",
+      "title": "URL du bouton"
+    },
+    "badge": {
+      "type": "string",
+      "title": "Badge"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Pages d'affichage",
+      "default": []
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "name": "WalkRoute",
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "title": "ProgressEntry li\u00e9e (ID)"
+    },
+    "dog_id": {
+      "type": "string",
+      "title": "Chien (ID)"
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "title": "Points GPS [[lat,lng],...]",
+      "default": []
+    },
+    "distance_km": {
+      "type": "number",
+      "title": "Distance (km)",
+      "default": 0
+    },
+    "steps": {
+      "type": "number",
+      "title": "Nombre de pas",
+      "default": 0
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Dur\u00e9e (minutes)",
+      "default": 0
+    },
+    "start_at": {
+      "type": "string",
+      "title": "D\u00e9but de la balade (ISO)"
+    },
+    "end_at": {
+      "type": "string",
+      "title": "Fin de la balade (ISO)"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "zone_tag": {
+      "type": "string",
+      "title": "Zone (zoneTag)"
+    },
+    "is_shared": {
+      "type": "boolean",
+      "title": "Partag\u00e9 communaut\u00e9",
+      "default": false
+    }
+  },
+  "required": [
+    "dog_id",
+    "points"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

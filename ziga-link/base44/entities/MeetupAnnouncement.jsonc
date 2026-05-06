@@ -1,0 +1,188 @@
+{
+  "type": "object",
+  "properties": {
+    "dog_id": {
+      "type": "string",
+      "title": "Chien principal (ID)"
+    },
+    "dog_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Chiens concern\u00e9s (IDs)",
+      "default": []
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien principal"
+    },
+    "dog_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Noms des chiens",
+      "default": []
+    },
+    "owner_name": {
+      "type": "string",
+      "title": "Nom du propri\u00e9taire"
+    },
+    "owner_photo": {
+      "type": "string",
+      "title": "Photo du propri\u00e9taire"
+    },
+    "title": {
+      "type": "string",
+      "title": "Titre de l'annonce"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "date": {
+      "type": "string",
+      "title": "Date souhait\u00e9e"
+    },
+    "time": {
+      "type": "string",
+      "title": "Heure souhait\u00e9e"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Dur\u00e9e pr\u00e9vue (minutes)"
+    },
+    "distance_km": {
+      "type": "number",
+      "title": "Distance approximative (km)"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "matched",
+        "completed",
+        "cancelled"
+      ],
+      "title": "Statut",
+      "default": "open"
+    },
+    "matched_with_dog_id": {
+      "type": "string",
+      "title": "Match\u00e9e avec chien ID"
+    },
+    "matched_with_owner": {
+      "type": "string",
+      "title": "Match\u00e9e avec propri\u00e9taire"
+    },
+    "meeting_place_name": {
+      "type": "string",
+      "title": "Lieu de rencontre"
+    },
+    "meeting_place_lat": {
+      "type": "number",
+      "title": "Latitude lieu"
+    },
+    "meeting_place_lng": {
+      "type": "number",
+      "title": "Longitude lieu"
+    },
+    "conversation_id": {
+      "type": "string",
+      "title": "ID Conversation de groupe"
+    },
+    "reminder_sent_flags": {
+      "type": "object",
+      "title": "Rappels envoy\u00e9s (idempotence)",
+      "default": {}
+    },
+    "walk_started_at": {
+      "type": "string",
+      "title": "Balade d\u00e9marr\u00e9e le (ISO)"
+    },
+    "walk_ended_at": {
+      "type": "string",
+      "title": "Balade termin\u00e9e le (ISO)"
+    },
+    "walk_saved_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Emails ayant sauvegard\u00e9 la balade",
+      "default": []
+    }
+  },
+  "required": [
+    "dog_id",
+    "title",
+    "date"
+  ],
+  "name": "MeetupAnnouncement",
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.status": "open"
+        },
+        {
+          "data.status": "matched"
+        },
+        {
+          "data.walk_saved_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.walk_saved_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

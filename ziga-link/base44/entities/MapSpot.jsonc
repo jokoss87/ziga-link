@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "name": "MapSpot",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "meetup",
+        "walk",
+        "bar",
+        "hotel",
+        "beach",
+        "forbidden",
+        "zone",
+        "route"
+      ],
+      "title": "Type de spot"
+    },
+    "title": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "city": {
+      "type": "string",
+      "title": "Ville"
+    },
+    "author_name": {
+      "type": "string",
+      "title": "Auteur"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo"
+    },
+    "rating": {
+      "type": "number",
+      "title": "Note (1-5)"
+    },
+    "zoneTag": {
+      "type": "string",
+      "title": "Zone"
+    },
+    "is_validated": {
+      "type": "boolean",
+      "title": "Valid\u00e9",
+      "default": false
+    }
+  },
+  "required": [
+    "type",
+    "latitude",
+    "longitude"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

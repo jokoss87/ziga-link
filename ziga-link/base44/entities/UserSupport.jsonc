@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "name": "UserSupport",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "non_soutien",
+        "soutien_actif",
+        "soutien_expire"
+      ],
+      "title": "Statut",
+      "default": "non_soutien"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Montant (\u20ac)"
+    },
+    "is_monthly": {
+      "type": "boolean",
+      "title": "Abonnement mensuel",
+      "default": false
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "Stripe Customer ID"
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "title": "Stripe Subscription ID"
+    },
+    "last_stripe_event_id": {
+      "type": "string",
+      "title": "Dernier \u00e9v\u00e9nement paiement trait\u00e9 (idempotence)"
+    },
+    "last_cancel_event_id": {
+      "type": "string",
+      "title": "Dernier \u00e9v\u00e9nement annulation trait\u00e9 (idempotence)"
+    },
+    "started_at": {
+      "type": "string",
+      "title": "Date de d\u00e9but"
+    },
+    "expires_at": {
+      "type": "string",
+      "title": "Date d'expiration"
+    },
+    "total_paid": {
+      "type": "number",
+      "title": "Total pay\u00e9 (cumulatif \u20ac)",
+      "default": 0
+    },
+    "payment_count": {
+      "type": "number",
+      "title": "Nombre de paiements",
+      "default": 0
+    }
+  },
+  "required": [
+    "user_email"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": null
+  }
+}

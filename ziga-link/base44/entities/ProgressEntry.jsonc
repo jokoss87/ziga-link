@@ -1,0 +1,163 @@
+{
+  "type": "object",
+  "name": "ProgressEntry",
+  "properties": {
+    "dog_id": {
+      "type": "string",
+      "title": "Chien"
+    },
+    "dog_name": {
+      "type": "string",
+      "title": "Nom du chien"
+    },
+    "session_type": {
+      "type": "string",
+      "enum": [
+        "obeissance",
+        "sport",
+        "socialisation",
+        "balade",
+        "jeu",
+        "soin",
+        "autre"
+      ],
+      "title": "Type de s\u00e9ance"
+    },
+    "title": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Dur\u00e9e (minutes)"
+    },
+    "mood": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "bien",
+        "moyen",
+        "difficile"
+      ],
+      "title": "Humeur de s\u00e9ance"
+    },
+    "exercises": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Exercices travaill\u00e9s"
+    },
+    "media_url": {
+      "type": "string",
+      "title": "Photo/Vid\u00e9o"
+    },
+    "objective": {
+      "type": "string",
+      "title": "Objectif"
+    },
+    "badge_earned": {
+      "type": "string",
+      "title": "Badge obtenu"
+    },
+    "steps": {
+      "type": "number",
+      "title": "Nombre de pas",
+      "default": 0
+    },
+    "distance_km": {
+      "type": "number",
+      "title": "Distance (km)",
+      "default": 0
+    },
+    "route_points": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "title": "Points GPS du trajet [[lat,lng],...]",
+      "default": []
+    },
+    "announcement_id": {
+      "type": "string",
+      "title": "ID Annonce (idempotence balade)"
+    },
+    "owner_email": {
+      "type": "string",
+      "title": "Email propri\u00e9taire (balade partag\u00e9e)"
+    },
+    "session_date": {
+      "type": "string",
+      "title": "Date de la s\u00e9ance (ISO, si diff\u00e9rente de created_date)"
+    }
+  },
+  "required": [
+    "dog_id",
+    "title",
+    "session_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.owner_email": "{{user.email}}"
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.owner_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.owner_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.owner_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

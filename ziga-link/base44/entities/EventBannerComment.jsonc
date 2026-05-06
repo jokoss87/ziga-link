@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "name": "EventBannerComment",
+  "properties": {
+    "banner_id": {
+      "type": "string",
+      "title": "ID du banner"
+    },
+    "user_email": {
+      "type": "string",
+      "title": "Email utilisateur"
+    },
+    "pseudo": {
+      "type": "string",
+      "title": "Pseudo"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo de profil"
+    },
+    "content": {
+      "type": "string",
+      "title": "Contenu"
+    }
+  },
+  "required": [
+    "banner_id",
+    "user_email",
+    "pseudo",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

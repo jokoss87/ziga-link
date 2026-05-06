@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "name": "ActivityConfig",
+  "properties": {
+    "type_key": {
+      "type": "string",
+      "title": "Cl\u00e9 technique (canicross, agility...)"
+    },
+    "label": {
+      "type": "string",
+      "title": "Nom affich\u00e9"
+    },
+    "emoji": {
+      "type": "string",
+      "title": "Emoji (si pas d'image)"
+    },
+    "image_url": {
+      "type": "string",
+      "title": "URL de l'image"
+    },
+    "sort_order": {
+      "type": "integer",
+      "title": "Ordre d'affichage",
+      "default": 99
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Activ\u00e9",
+      "default": true
+    }
+  },
+  "required": [
+    "type_key",
+    "label"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
